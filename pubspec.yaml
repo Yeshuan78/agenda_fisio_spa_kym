@@ -1,0 +1,104 @@
+# [SECCIÓN 1.1] - Información del paquete
+name: agenda_fisio_spa_kym
+description: "Sistema multiplataforma para citas de Fisio Spa KYM"
+version: 1.0.0+1
+publish_to: 'none'
+
+# [SECCIÓN 1.2] - Entorno SDK
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+# [SECCIÓN 1.3] - Dependencias principales
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2  
+  flutter_localizations:
+    sdk: flutter
+  firebase_core: ^3.4.1
+  firebase_auth: ^5.5.2
+  cloud_firestore: ^5.0.1
+  table_calendar: ^3.0.9
+  intl: ^0.19.0
+  cupertino_icons: ^1.0.8
+  uuid: ^4.0.0
+  image_picker: ^1.0.7
+  file_picker: ^6.2.1
+  font_awesome_flutter: ^10.6.0
+  url_launcher: ^6.3.1
+  fluttertoast: ^8.2.1
+  qr_flutter: ^4.0.0
+  clipboard: ^0.1.3
+  mailer: ^6.1.0
+  stream_transform: ^2.1.0
+  isolate: ^2.1.1
+  
+  # ✅ EXPORTACIÓN - DEPENDENCIAS ACTUALIZADAS Y NUEVAS
+  csv: ^6.0.0                    # ⬆️ Actualizada de 5.0.0 a 6.0.0 para exportación real
+  excel: ^2.0.4                  # ⬆️ Actualizada de 2.0.4 a 4.0.2 para funcionalidades avanzadas
+  universal_html: ^2.2.4         # 🆕 Nueva - Descarga web universal
+  permission_handler: ^11.1.0    # 🆕 Nueva - Permisos móvil
+  mime: ^1.0.4                   # 🆕 Nueva - Tipos MIME
+  
+  xml: ^6.2.2
+  firebase_storage: ^12.4.5
+  path_provider: ^2.1.2
+  fl_chart: ^0.55.2
+  collection: ^1.18.0
+  printing: ^5.11.0
+  pdf: ^3.10.7                   # ✅ Ya actualizada - Perfecta para exportación PDF
+  open_file: ^3.2.1
+  http: ^0.13.6
+  file_saver: ^0.2.8
+  flutter_colorpicker: ^1.0.3
+  flutter_speed_dial: ^7.0.0
+  share_plus: ^7.2.1
+  shared_preferences: ^2.2.2
+  sensors_plus: ^4.0.2
+  geocoding: ^3.0.0
+  
+  # ✅ DEPENDENCIA EXISTENTE para extracción de texto de PDF
+  read_pdf_text: ^0.3.1
+
+# [SECCIÓN 1.4] - Dependencias de desarrollo
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  
+  # ✅ NUEVAS DEPENDENCIAS DE DESARROLLO PARA TESTING EXPORTACIÓN
+  mocktail: ^1.0.1               # 🆕 Nueva - Testing de servicios de exportación
+
+# [SECCIÓN 1.5] - Configuración Flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/logo.png
+    - assets/images/logo_kym_black.png
+    - assets/images/Mariposa.png          # ✅ TU LOGO AGREGADO
+    - assets/fonts/Poppins-Regular.ttf
+
+# ========================================================================
+# 📝 CHANGELOG DE DEPENDENCIAS PARA EXPORTACIÓN REAL
+# ========================================================================
+#
+# 🆕 NUEVAS DEPENDENCIAS:
+# - universal_html: ^2.2.4      → Descarga de archivos en web
+# - permission_handler: ^11.1.0 → Permisos de almacenamiento móvil  
+# - mime: ^1.0.4               → Tipos MIME para archivos
+# - mocktail: ^1.0.1           → Testing de servicios
+#
+# ⬆️ ACTUALIZADAS:
+# - csv: 5.0.0 → 6.0.0          → Mejor compatibilidad y UTF-8 BOM
+# - excel: 2.0.4 → 4.0.2        → Soporte completo para .xlsx y estilos
+#
+# ✅ MANTENIDAS (ya eran correctas):
+# - pdf: ^3.10.7                → Perfecta para exportación PDF
+# - path_provider: ^2.1.2       → Para rutas de archivos móvil
+# - intl: ^0.19.0               → Para formateo de fechas
+#
+# 🎯 TOTAL DE DEPENDENCIAS AGREGADAS/ACTUALIZADAS: 5
+# 💾 TAMAÑO ESTIMADO ADICIONAL: ~2-3MB
+# ⚡ COMPATIBILIDAD: Web ✅ Android ✅ iOS ✅
+#
+# ========================================================================

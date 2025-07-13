@@ -1,0 +1,284 @@
+// [clients_bulk_actions_widget.dart] - WIDGET INDEPENDIENTE PARA ACCIONES MASIVAS
+// 📁 Ubicación: /lib/widgets/clients/bulk/clients_bulk_actions_widget.dart
+// 🎯 OBJETIVO: Widget separado para todas las acciones masivas (eliminar, etiquetas, exportar)
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:agenda_fisio_spa_kym/theme/theme.dart';
+import 'package:agenda_fisio_spa_kym/models/clients/client_model.dart';
+import 'package:agenda_fisio_spa_kym/screens/clients/utils/client_constants.dart';
+import 'package:agenda_fisio_spa_kym/widgets/clients/export/clients_export_actions_widget.dart';
+
+/// 🔧 WIDGET INDEPENDIENTE PARA ACCIONES MASIVAS DE CLIENTES
+/// Maneja selección, eliminación, etiquetado y exportación
+class ClientsBulkActionsWidget extends StatefulWidget {
+  final List<ClientModel> allClients;
+  final List<ClientModel> filteredClients;
+  final Set<String> selectedClients;
+  final int totalFilteredClients;
+  final Function(List<String>) onBulkDelete;
+  final Function(List<String>, List<ClientTag>) onBulkAddTags;
+  final VoidCallback onClearSelection;
+  final VoidCallback onSelectAll;
+  final VoidCallback? onExportCompleted;
+
+  const ClientsBulkActionsWidget({
+    super.key,
+    required this.allClients,
+    required this.filteredClients,
+    required this.selectedClients,
+    required this.totalFilteredClients,
+    required this.onBulkDelete,
+    required this.onBulkAddTags,
+    required this.onClearSelection,
+    required this.onSelectAll,
+    this.onExportCompleted,
+  });
+
+  @override
+  State<ClientsBulkActionsWidget> createState() => _ClientsBulkActionsWidgetState();
+}
+
+class _ClientsBulkActionsWidgetState extends State<ClientsBulkActionsWidget>
+    with SingleTickerProviderStateMixin {
+  // ✅ CONTROLADOR DE ANIMACIÓN
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
+
+  // ✅ ESTADO DE UI
+  bool _isVisible = false;
+  bool _isExporting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeAnimations();
+  }
+
+  void _initializeAnimations() {
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 400),
+      vsync: this,
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0.0, 1.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOut,
+    );
+
+    _scaleAnimation = Tween<double>(
+      begin: 0.8,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.elasticOut,
+    ));
+  }
+
+  @override
+  void didUpdateWidget(ClientsBulkActionsWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    final shouldShow = widget.selectedClients.isNotEmpty;
+
+    if (shouldShow != _isVisible) {
+      setState(() {
+        _isVisible = shouldShow;
+      });
+
+      if (shouldShow) {
+        _animationController.forward();
+        HapticFeedback.lightImpact();
+      } else {
+        _animationController.reverse();
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isVisible && widget.selectedClients.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return SlideTransition(
+          position: _slideAnimation,
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: _buildToolbar(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildToolbar() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            kBrandPurple,
+            kBrandPurple.withValues(alpha: 0.9),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: kBrandPurple.withValues(alpha: 0.4),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Row(
+            children: [
+              _buildSelectionInfo(),
+              const Spacer(),
+              _buildActionButtons(),
+              const SizedBox(width: 16),
+              _buildCloseButton(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSelectionInfo() {
+    return Row(
+      children: [
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              widget.selectedClients.length.toString(),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '${widget.selectedClients.length} seleccionados',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              _getSelectionSubtitle(),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white70,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButtons() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _buildSelectAllButton(),
+        const SizedBox(width: 8),
+        _buildTagsButton(),
+        const SizedBox(width: 8),
+        _buildExportButton(),
+        const SizedBox(width: 8),
+        _buildDeleteButton(),
+      ],
+    );
+  }
+
+  Widget _buildSelectAllButton() {
+    final allSelected =
+        widget.selectedClients.length == widget.totalFilteredClients;
+    final hasPartialSelection =
+        widget.selectedClients.isNotEmpty && !allSelected;
+
+    return Tooltip(
+      message: allSelected ? 'Deseleccionar todo' : 'Seleccionar todo',
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (allSelected) {
+            widget.onClearSelection();
+          } else {
+            widget.onSelectAll();
+          }
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                allSelected
+                    ? Icons.deselect
+                    : hasPartialSelection
+                        ? Icons.select_all
+                        : Icons.check_box_outline_blank,
+                color: Colors.white,
+                size: 16,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                allSelected ? 'Deseleccionar' : 'Seleccionar',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight

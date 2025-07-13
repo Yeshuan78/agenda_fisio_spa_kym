@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "fisiospakym-afff6",
+    "prod": "fisiospakym-afff6"
+  },
+  "targets": {},
+  "etags": {}
+}

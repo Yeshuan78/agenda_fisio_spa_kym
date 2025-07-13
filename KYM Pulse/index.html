@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYM Pulse - Registro de Servicio</title>
+  <style>
+    :root {
+      --brand-purple: #9920A7;
+      --accent-blue: #4DB1E0;
+      --accent-green: #8ABF54;
+      --background: #f5f5f9;
+      --purple-light: #EADCF9;
+      --shadow-primary: 0 10px 40px rgba(153, 32, 167, 0.15);
+      --shadow-secondary: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --gradient-primary: linear-gradient(135deg, #9920A7 0%, #4DB1E0 100%);
+      --gradient-success: linear-gradient(135deg, #8ABF54 0%, #4DB1E0 100%);
+      --glassmorphism: rgba(255, 255, 255, 0.95);
+      --glassmorphism-border: rgba(255, 255, 255, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--background);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ✨ BACKGROUND PREMIUM CON ANIMACIONES */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      opacity: 0.03;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(153, 32, 167, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(77, 177, 224, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(138, 191, 84, 0.08) 0%, transparent 50%);
+      animation: backgroundFloat 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes backgroundFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(2deg) scale(1.05); }
+    }
+
+    /* ✨ PARTICLES FLOTANTES */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--brand-purple);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: particleFloat 15s linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.3;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* ✨ LOGO PREMIUM CON ANIMACIÓN */
+    .logo {
+      display: block;
+      margin-bottom: 30px;
+      max-height: 100px;
+      max-width: 220px;
+      filter: drop-shadow(0 8px 25px rgba(153, 32, 167, 0.2));
+      animation: logoEntrance 1s ease-out, logoFloat 6s ease-in-out 1s infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    @keyframes logoEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ✨ CONTAINER PREMIUM CON GLASSMORPHISM */
+    .container {
+      width: 95%;
+      max-width: 500px;
+      background: var(--glassmorphism);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glassmorphism-border);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: var(--shadow-primary);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: containerEntrance 0.8s ease-out 0.3s both;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 2s ease-out 0.8s; /* ✅ ARREGLO: Solo una vez, más sutil */
+    }
+
+    @keyframes containerEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ✨ HEADINGS PREMIUM */
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      animation: titleGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.1); }
+    }
+
+    #infoServicio {
+      font-weight: 500;
+      margin-bottom: 30px;
+      color: #4a5568;
+      line-height: 1.6;
+      animation: fadeInUp 0.6s ease-out 0.6s both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ✨ FORM ELEMENTS PREMIUM */
+    label {
+      display: block;
+      margin: 20px 0 8px;
+      font-weight: 600;
+      color: var(--brand-purple);
+      font-size: 14px;
+      text-align: left;
+    }
+
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border: 2px solid rgba(153, 32, 167, 0.1);
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: relative;
+      color: #2d3748; /* ✅ ARREGLO: Color más oscuro para el texto */
+    }
+
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--brand-purple);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(153, 32, 167, 0.1);
+      transform: translateY(-2px);
+      color: #1a202c; /* ✅ ARREGLO: Color aún más oscuro en focus */
+    }
+
+    input[type="number"]::placeholder,
+    textarea::placeholder {
+      color: #a0aec0;
+      font-weight: 400;
+    }
+
+    /* ✨ BUTTON PREMIUM */
+    button {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-secondary);
+      min-width: 140px;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(153, 32, 167, 0.3);
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ✨ LOADING STATES */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ✨ MESSAGES PREMIUM */
+    #mensaje {
+      margin-top: 24px;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: messageSlide 0.3s ease-out;
+    }
+
+    @keyframes messageSlide {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ✨ RATING SYSTEM PREMIUM - COMPACTO */
+    .rating {
+      display: flex;
+      justify-content: center;
+      gap: 6px; /* ✅ REDUCIDO: Era 8px */
+      margin: 12px 0; /* ✅ REDUCIDO: Era 20px */
+      padding: 16px; /* ✅ REDUCIDO: Era 20px */
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .estrella {
+      font-size: 32px; /* ✅ REDUCIDO: Era 40px */
+      color: #e2e8f0;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* ✅ REDUCIDO: Era 4px 8px */
+    }
+
+    .estrella:hover {
+      transform: scale(1.2) rotate(8deg); /* ✅ REDUCIDO: Era 1.3 y 10deg */
+      filter: drop-shadow(0 4px 8px rgba(255, 180, 0, 0.4)); /* ✅ REDUCIDO: Era 6px 12px */
+    }
+
+    .estrella.seleccionada {
+      color: #FFB400;
+      transform: scale(1.1);
+      animation: starPulse 0.6s ease;
+    }
+
+    @keyframes starPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4) rotate(15deg); }
+      100% { transform: scale(1.1); }
+    }
+
+    .estrella.idle-glow {
+      animation: starGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes starGlow {
+      0%, 100% { 
+        color: #e2e8f0;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+      }
+      50% { 
+        color: #ffd700;
+        filter: drop-shadow(0 6px 15px rgba(255, 215, 0, 0.6));
+        transform: scale(1.05);
+      }
+    }
+
+    /* ✨ TOOLTIP PREMIUM - COMPACTO */
+    .tooltip-boom {
+      position: absolute;
+      top: -40px; /* ✅ REDUCIDO: Era -45px */
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-success);
+      color: white;
+      font-size: 11px; /* ✅ REDUCIDO: Era 12px */
+      font-weight: 600;
+      padding: 6px 12px; /* ✅ REDUCIDO: Era 8px 16px */
+      border-radius: 16px; /* ✅ REDUCIDO: Era 20px */
+      box-shadow: 0 6px 20px rgba(138, 191, 84, 0.4); /* ✅ REDUCIDO: Era 8px 25px */
+      white-space: nowrap;
+      animation: tooltipBounce 1.2s ease forwards;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .tooltip-boom::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--accent-green);
+    }
+
+    @keyframes tooltipBounce {
+      0% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(10px) scale(0.8); 
+      }
+      30% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(-5px) scale(1.1); 
+      }
+      60% { 
+        transform: translateX(-50%) translateY(0) scale(1); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-15px) scale(0.9); 
+      }
+    }
+
+    /* ✨ SUCCESS STATE PREMIUM */
+    #agradecimiento {
+      display: none;
+      margin-top: 40px;
+      padding: 30px;
+      background: var(--gradient-success);
+      border-radius: 20px;
+      color: white;
+      animation: successEntrance 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #agradecimiento::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: successGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes successEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes successGlow {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(180deg); }
+    }
+
+    #agradecimiento h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #agradecimiento p {
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ✨ WHATSAPP FAB PREMIUM */
+    .fab-whatsapp {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
+      z-index: 999;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      animation: fabEntrance 0.6s ease-out 2s both, fabPulse 3s ease-in-out 3s infinite;
+    }
+
+    .fab-whatsapp img {
+      width: 70%;
+      height: 70%;
+      margin: 15%;
+    }
+
+    .fab-whatsapp:hover {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes fabEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0) rotate(180deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes fabPulse {
+      0%, 100% { 
+        box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4); 
+      }
+      50% { 
+        box-shadow: 0 20px 60px rgba(37, 211, 102, 0.7); 
+      }
+    }
+
+    /* ✨ CELEBRATION EFFECTS */
+    #celebration {
+      display: none;
+      font-size: 60px;
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      animation: celebrationBurst 1.5s ease forwards;
+      z-index: 1000;
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+    }
+
+    @keyframes celebrationBurst {
+      0% { 
+        opacity: 0; 
+        transform: translateX(-50%) scale(0) rotate(0deg); 
+      }
+      30% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.5) rotate(180deg); 
+      }
+      70% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.2) rotate(360deg); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateX(-50%) scale(0.3) rotate(540deg); 
+      }
+    }
+
+    /* ✨ CHIP FEEDBACK PREMIUM */
+    #chipFeedback {
+      display: none;
+      position: fixed;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 12px 40px rgba(153, 32, 167, 0.4);
+      animation: chipSlide 2.5s ease forwards;
+    }
+
+    @keyframes chipSlide {
+      0% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(30px) scale(0.8); 
+      }
+      15% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0) scale(1); 
+      }
+      85% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0) scale(1); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-30px) scale(0.8); 
+      }
+    }
+
+    /* ✨ RESPONSIVE PREMIUM */
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 25px;
+        margin: 15px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .logo {
+        max-height: 80px;
+        margin-bottom: 20px;
+      }
+
+      .estrella {
+        font-size: 28px; /* ✅ REDUCIDO: Era 36px */
+        margin: 0 1px; /* ✅ REDUCIDO: Era 2px */
+      }
+
+      .fab-whatsapp {
+        width: 56px;
+        height: 56px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      button {
+        padding: 14px 28px;
+        font-size: 15px;
+      }
+
+      /* ✅ NUEVO: Spacing compacto para móvil */
+      .rating {
+        padding: 12px;
+        margin: 8px 0;
+      }
+    }
+
+    /* ✨ SMOOTH TRANSITIONS */
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ✨ ACCESSIBILITY */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ✨ DARK MODE SUPPORT */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0f1419;
+        --glassmorphism: rgba(255, 255, 255, 0.05);
+        --glassmorphism-border: rgba(255, 255, 255, 0.1);
+      }
+
+      body {
+        color: #e2e8f0;
+      }
+
+      .container {
+        background: rgba(15, 20, 25, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      input[type="number"],
+      textarea {
+        background: rgba(255, 255, 255, 0.05);
+        color: #e2e8f0; /* ✅ ARREGLO: Texto claro para dark mode */
+        border-color: rgba(153, 32, 167, 0.3);
+      }
+
+      input[type="number"]::placeholder,
+      textarea::placeholder {
+        color: #a0aec0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ✨ PARTICLES BACKGROUND -->
+  <div class="particles" id="particles"></div>
+
+  <div class="wrapper">
+    <img src="assets/images/logo.png" alt="Fisio Spa KYM" class="logo" />
+    <div class="container">
+      <h1>Registro de Servicio</h1>
+      <div id="infoServicio">Cargando información...</div>
+      
+      <div id="step1">
+        <label for="empleado">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 20px; height: 20px; background: linear-gradient(135deg, #9920A7, #4DB1E0); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">1</span>
+            Número de empleado (obligatorio)
+          </span>
+        </label>
+        <input type="number" id="empleado" placeholder="Ej. 12456" required />
+        <button id="confirmarEmpleado">
+          <span id="btnText">Confirmar Empleado</span>
+        </button>
+      </div>
+      
+      <form id="formEncuesta" style="display:none;"></form>
+      
+      <div id="agradecimiento">
+        <h2>🎉 ¡Gracias por tu tiempo!</h2>
+        <p>Tu respuesta fue registrada exitosamente.</p>
+        <p>Serás redirigido en unos segundos...</p>
+      </div>
+      
+      <div id="mensaje"></div>
+    </div>
+  </div>
+
+  <!-- ✨ WHATSAPP FAB PREMIUM -->
+  <a id="fabWhatsapp" href="https://wa.me/525544818100" target="_blank" class="fab-whatsapp" title="¿Dudas? Escríbenos por WhatsApp 💬">
+    <img src="assets/images/whatsapp-icon.png" alt="WhatsApp" />
+  </a>
+
+  <!-- ✨ FEEDBACK ELEMENTS -->
+  <div id="chipFeedback">Tu calificación ha sido registrada ✅</div>
+  <div id="celebration">🎉</div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js';
+    import {
+      getFirestore, collection, addDoc, getDoc, getDocs,
+      serverTimestamp, query, limit, updateDoc, doc
+    } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA2JYgF-4RGvlXe1A-QTTd3qAd0IoaYqLM",
+      authDomain: "fisiospakym-afff6.firebaseapp.com",
+      projectId: "fisiospakym-afff6",
+      storageBucket: "fisiospakym-afff6.appspot.com",
+      messagingSenderId: "468567229058",
+      appId: "1:468567229058:web:7aa7d697ed61cd89fc46df"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const params = new URLSearchParams(window.location.search);
+    const eventoId = params.get("e");
+    const profesionalId = params.get("p");
+    const servicioId = params.get("s");
+
+    const infoServicio = document.getElementById("infoServicio");
+    const form = document.getElementById("formEncuesta");
+    const mensaje = document.getElementById("mensaje");
+    const inputEmpleado = document.getElementById("empleado");
+    const btnConfirmar = document.getElementById("confirmarEmpleado");
+    const btnText = document.getElementById("btnText");
+    const step1 = document.getElementById("step1");
+    const agradecimiento = document.getElementById("agradecimiento");
+
+    let nombreProf = profesionalId;
+    let nombreServ = servicioId;
+    let docRef = null;
+    let numeroEmpleado = null;
+
+    // ✨ CREAR PARTICLES BACKGROUND
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 15;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // ✨ ENHANCED ALERT FUNCTION
+    function alerta(texto, tipo = 'info') {
+      mensaje.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: ${tipo === 'error' ? '#ef4444' : tipo === 'success' ? '#22c55e' : '#6366f1'}; color: white; font-size: 14px;">
+            ${tipo === 'error' ? '⚠️' : tipo === 'success' ? '✅' : '🛠️'}
+          </div>
+          <span>${texto}</span>
+        </div>
+      `;
+      mensaje.style.display = 'block';
+    }
+
+    // ✨ LOADING STATE ENHANCEMENT
+    function setLoading(isLoading, element, originalText) {
+      if (isLoading) {
+        element.innerHTML = `<span class="loading"></span>Procesando...`;
+        element.disabled = true;
+      } else {
+        element.innerHTML = originalText;
+        element.disabled = false;
+      }
+    }
+
+    async function cargarInfoSuperior() {
+      try {
+        const docProf = await getDoc(doc(db, 'profesionales', profesionalId));
+        const docServ = await getDoc(doc(db, 'services', servicioId));
+        if (docProf.exists()) nombreProf = docProf.data().nombre;
+        if (docServ.exists()) nombreServ = docServ.data().name;
+      } catch (err) {
+        alerta("Error cargando nombres: " + err.message, 'error');
+      }
+      
+      infoServicio.innerHTML = `
+        <div style="background: linear-gradient(135deg, rgba(153, 32, 167, 0.1), rgba(77, 177, 224, 0.1)); padding: 20px; border-radius: 16px; border: 1px solid rgba(153, 32, 167, 0.2);">
+          <p style="margin: 0; line-height: 1.6;">
+            Esperamos que tu servicio de <strong style="color: #9920A7; font-weight: 600;">"${nombreServ}"</strong> haya sido de tu agrado. 
+            <br><br>
+            Te atendió <strong style="color: #4DB1E0; font-weight: 600;">${nombreProf}</strong>. 
+            <br><br>
+            Por favor, ingresa tu número de empleado para registrar tu servicio.
+          </p>
+        </div>
+      `;
+    }
+
+    async function registrarEscaneo() {
+      try {
+        numeroEmpleado = inputEmpleado.value.trim();
+        if (!numeroEmpleado) {
+          alerta("⚠️ Debes ingresar tu número de empleado antes de continuar.", 'error');
+          inputEmpleado.focus();
+          // ✨ SHAKE ANIMATION
+          inputEmpleado.style.animation = 'shake 0.5s ease-in-out';
+          setTimeout(() => inputEmpleado.style.animation = '', 500);
+          return;
+        }
+
+        setLoading(true, btnConfirmar, 'Confirmar Empleado');
+
+        const ref = collection(db, 'eventos', eventoId, 'registros');
+        docRef = await addDoc(ref, {
+          servicioId, profesionalId, eventoId,
+          fecha: serverTimestamp(),
+          numeroEmpleado,
+          completado: false,
+          plataforma: navigator.platform,
+          userAgent: navigator.userAgent,
+        });
+
+        alerta("✅ Número confirmado. Por favor responde la encuesta.", 'success');
+        
+        // ✨ SMOOTH TRANSITIONS
+        step1.style.animation = 'fadeOut 0.5s ease-out';
+        setTimeout(() => {
+          step1.style.display = 'none';
+          form.style.display = 'block';
+          form.style.animation = 'fadeInUp 0.6s ease-out';
+          document.getElementById("fabWhatsapp").style.display = 'block';
+          
+          infoServicio.innerHTML = `
+            <div style="background: linear-gradient(135deg, rgba(138, 191, 84, 0.1), rgba(77, 177, 224, 0.1)); padding: 20px; border-radius: 16px; border: 1px solid rgba(138, 191, 84, 0.3);">
+              <p style="margin: 0; display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 24px;">💬</span>
+                <span>Ayúdanos respondiendo la siguiente encuesta para seguir mejorando tu experiencia.</span>
+              </p>
+            </div>
+          `;
+        }, 500);
+
+        await cargarEncuesta();
+      } catch (err) {
+        alerta("❌ ERROR guardando escaneo: " + err.message, 'error');
+        setLoading(false, btnConfirmar, 'Confirmar Empleado');
+      }
+    }
+
+    async function cargarEncuesta() {
+      const snap = await getDocs(query(collection(db, 'encuestas'), limit(1)));
+      if (snap.empty) return alerta("❌ No hay encuesta configurada", 'error');
+      
+      const data = snap.docs[0].data();
+      form.innerHTML = '';
+      
+      data.preguntas.forEach((p, i) => {
+        const name = `preg${i}`;
+        form.innerHTML += `
+          <div style="margin-bottom: 24px;"> <!-- ✅ REDUCIDO: Era 30px -->
+            <label style="margin-bottom: 10px;"> <!-- ✅ REDUCIDO: Era 12px -->
+              <span style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 24px; height: 24px; background: linear-gradient(135deg, #8ABF54, #4DB1E0); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">${i + 1}</span>
+                ${p.texto}
+              </span>
+            </label>
+            <div class="rating" data-name="${name}">
+              ${[1,2,3,4,5].map(n => `<span class="estrella glow idle-glow" data-value="${n}">★</span>`).join('')}
+            </div>
+          </div>
+        `;
+      });
+      
+      form.innerHTML += `
+        <div style="margin-top: 30px;">
+          <label>
+            <span style="display: flex; align-items: center; gap: 8px;">
+              <span style="width: 24px; height: 24px; background: linear-gradient(135deg, #9920A7, #4DB1E0); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">💬</span>
+              Comentario adicional (opcional)
+            </span>
+          </label>
+          <textarea name="comentario" rows="4" placeholder="Comparte cualquier comentario adicional..." style="margin-top: 12px; resize: vertical; min-height: 100px;"></textarea>
+        </div>
+        <button type="submit" style="width: 100%; margin-top: 20px; padding: 18px; font-size: 18px;">
+          <span>Enviar Encuesta</span>
+        </button>
+      `;
+      
+      // ✨ ENHANCED STAR INTERACTIONS
+      form.querySelectorAll('.rating').forEach(rating => {
+        const name = rating.dataset.name;
+        rating.querySelectorAll('.estrella').forEach(estrella => {
+          estrella.addEventListener('click', () => {
+            // ✨ HAPTIC FEEDBACK
+            navigator.vibrate?.([30, 10, 30]);
+            
+            // ✨ ENHANCED FEEDBACK
+            estrella.classList.add('boom');
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip-boom';
+            tooltip.textContent = ['😞', '😐', '🙂', '😊', '🤩'][parseInt(estrella.dataset.value) - 1] + ' ¡Gracias!';
+            estrella.appendChild(tooltip);
+            
+            setTimeout(() => {
+              estrella.classList.remove('boom');
+              if (tooltip.parentNode) {
+                estrella.removeChild(tooltip);
+              }
+            }, 1200);
+
+            const val = parseInt(estrella.dataset.value);
+            rating.querySelectorAll('.estrella').forEach(e => {
+              e.classList.remove('idle-glow', 'glow');
+              e.classList.toggle('seleccionada', parseInt(e.dataset.value) <= val);
+            });
+            rating.dataset.valor = val;
+
+            // ✨ CHIP FEEDBACK
+            const chipFeedback = document.getElementById('chipFeedback');
+            chipFeedback.textContent = `${val} estrella${val > 1 ? 's' : ''} seleccionada${val > 1 ? 's' : ''} ⭐`;
+            chipFeedback.style.display = 'block';
+            setTimeout(() => chipFeedback.style.display = 'none', 2500);
+          });
+
+          // ✨ ENHANCED HOVER EFFECTS
+          estrella.addEventListener('mouseenter', () => {
+            if (!estrella.classList.contains('seleccionada')) {
+              estrella.style.transform = 'scale(1.2) rotate(10deg)';
+              estrella.style.filter = 'drop-shadow(0 6px 12px rgba(255, 180, 0, 0.6))';
+            }
+          });
+
+          estrella.addEventListener('mouseleave', () => {
+            if (!estrella.classList.contains('seleccionada')) {
+              estrella.style.transform = '';
+              estrella.style.filter = '';
+            }
+          });
+        });
+      });
+    }
+
+    async function guardarEncuesta(data) {
+      if (!docRef) return alerta("❌ Registro inválido", 'error');
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      setLoading(true, submitBtn, 'Enviar Encuesta');
+
+      document.querySelectorAll('.rating').forEach(rating => {
+        const name = rating.dataset.name;
+        const val = parseInt(rating.dataset.valor || "0");
+        data[name] = val;
+      });
+
+      await updateDoc(docRef, { completado: true, encuesta: data });
+
+      // ✨ ENHANCED SUCCESS SEQUENCE
+      form.style.animation = 'fadeOut 0.5s ease-out';
+      
+      // ✨ CELEBRATION EFFECT
+      const celebration = document.getElementById("celebration");
+      celebration.style.display = "block";
+      setTimeout(() => celebration.style.display = "none", 1500);
+
+      setTimeout(() => {
+        form.style.display = 'none';
+        agradecimiento.style.display = 'block';
+        infoServicio.style.display = 'none';
+        step1.style.display = 'none';
+        mensaje.style.display = 'none';
+
+        // ✨ CONFETTI EFFECT
+        createConfetti();
+      }, 500);
+
+      setTimeout(() => {
+        window.location.href = "https://www.fisiospakym.com";
+      }, 5000);
+    }
+
+    // ✨ CONFETTI EFFECT
+    function createConfetti() {
+      const colors = ['#9920A7', '#4DB1E0', '#8ABF54', '#FFB400', '#FF6B6B'];
+      
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = Math.random() * 8 + 4 + 'px';
+        confetti.style.height = confetti.style.width;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = '50%';
+        confetti.style.zIndex = '9999';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear`;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          if (confetti.parentNode) {
+            confetti.parentNode.removeChild(confetti);
+          }
+        }, 5000);
+      }
+    }
+
+    // ✨ ADD CONFETTI ANIMATION TO CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px); }
+        75% { transform: translateX(8px); }
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // ✨ FORM SUBMISSION WITH ENHANCED UX
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {};
+      new FormData(form).forEach((val, key) => (data[key] = val));
+      await guardarEncuesta(data);
+    });
+
+    // ✨ ENHANCED VALIDATION
+    inputEmpleado.addEventListener('input', (e) => {
+      const value = e.target.value;
+      if (value.length > 0) {
+        e.target.style.borderColor = '#8ABF54';
+        e.target.style.boxShadow = '0 0 0 4px rgba(138, 191, 84, 0.1)';
+      } else {
+        e.target.style.borderColor = '';
+        e.target.style.boxShadow = '';
+      }
+    });
+
+    // ✨ ENTER KEY SUPPORT
+    inputEmpleado.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        registrarEscaneo();
+      }
+    });
+
+    // ✨ INITIALIZE
+    if (eventoId && profesionalId && servicioId) {
+      await cargarInfoSuperior();
+      createParticles();
+    } else {
+      alerta("❌ Faltan parámetros en la URL", 'error');
+    }
+
+    btnConfirmar.addEventListener("click", registrarEscaneo);
+
+    // ✨ ENHANCED LOADING SEQUENCE
+    setTimeout(() => {
+      document.body.style.opacity = '1';
+    }, 100);
+  </script>
+</body>
+</html>

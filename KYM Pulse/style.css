@@ -1,0 +1,76 @@
+/* KYM Pulse – Estilo institucional limpio y responsivo */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 2px solid #ccaee0;
+}
+
+h1, h2 {
+  color: #9920A7;
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+}
+
+label {
+  display: block;
+  margin: 16px 0 6px;
+  font-weight: 500;
+}
+
+select, input[type="checkbox"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #9920A7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #7d1a8a;
+}
+
+.hidden {
+  display: none;
+}
+
+.survey-container {
+  margin-top: 30px;
+}

@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "728048816297",
+    "firebase_url": "https://fisiospakym-afff6-default-rtdb.firebaseio.com",
+    "project_id": "fisiospakym-afff6",
+    "storage_bucket": "fisiospakym-afff6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728048816297:android:aebf799b765a55957319b8",
+        "android_client_info": {
+          "package_name": "com.example.agenda_fisio_spa_kym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728048816297-k25aos76mcae8buhpoc33mhcgbudto5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdWrHu7Zann-DANB-pvI6xxKovul-OY28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728048816297-k25aos76mcae8buhpoc33mhcgbudto5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728048816297:android:b67e7e407fc0251d7319b8",
+        "android_client_info": {
+          "package_name": "com.reservas.fisiospakym_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728048816297-jlpi6su175v3u96qtjm6j27bl5j0nsdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reservas.fisiospakym_app",
+            "certificate_hash": "1116a4046246e853111bce970e4e2e9723787c3b"
+          }
+        },
+        {
+          "client_id": "728048816297-k25aos76mcae8buhpoc33mhcgbudto5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdWrHu7Zann-DANB-pvI6xxKovul-OY28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728048816297-k25aos76mcae8buhpoc33mhcgbudto5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
